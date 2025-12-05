@@ -22,7 +22,9 @@
 </pre>
 ### Context:
 Hi guys, my name is 
+
 <img width="663" height="241" alt="ascii-art-text" src="https://github.com/user-attachments/assets/dce75778-0cdb-4f4e-a105-465debdc7b26" />
+
 or "iMist" (idk, i was bored lol.) and I made this silly thing bcs
 I got to shy an nervous on stream, also my english is kinda broken since I'm a non native speaker
 and yeah, I'm still learning code, I had a lot of fun testing and making this, I know it's a small program.
