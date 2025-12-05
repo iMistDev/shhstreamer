@@ -68,3 +68,5 @@ TODO.md
 build/
 dist/
 *.spec
+
+*.ico
