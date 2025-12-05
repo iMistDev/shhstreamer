@@ -31,6 +31,11 @@
                         <option value="0">Loading...</option>
                     </select>
                 </div>
+            <div class="control">
+                <label>Volumen: <span id="volLabel">100%</span></label>
+                <input type="range" min="0" max="100" value="100" 
+                    oninput="updateVolume(this.value)">
+            </div>
         </div>
 
         <div id="console" class="console">

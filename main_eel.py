@@ -3,13 +3,15 @@ import threading
 import vtt_module
 import tts_module
 import speech_recognition as sr
+import asyncio
 
 eel.init('web')
 
 app_config = {
     "mic": 0,
     "lang": "es-419",
-    "voice": 0
+    "voice": 0,
+    "volume": 50
 }
 
 active_stream = False
@@ -51,7 +53,7 @@ def get_lists():
         mics = vtt_module.select_mic()
         print(f" -> Microphones found!: {len(mics)}")
         print(" -> Searching Voices...")
-        voices = tts_module.select_voice()
+        voices = tts_module.list_voices()
         print(f" -> Voices found!: {len(voices)}")
     
         return{
@@ -101,7 +103,9 @@ def audio_loop():
                         eel.js_log(f" >Your Microphone: {text}")
                         if active_stream:
                             eel.js_log(f" >Your voice: {text}")
-                            tts_module.speak(text, app_config["voice"])
+                            asyncio.run(tts_module.speak(text, app_config["voice"], app_config["volume"]))
+                            #Deprecated on ver. 2.0
+                            #tts_module.speak(text, app_config["voice"])
                             eel.js_log("Listening...")
                 except Exception as e:
                     print(f"Error while looping: {e}")

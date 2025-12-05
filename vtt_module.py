@@ -5,7 +5,7 @@ import pyaudio
 import utils
 
 def select_language():
-    utils.cleaning()
+    #utils.cleaning()
     print("\n--- Languages Supported ---")
     print("\nMore available languages incoming")
     for key, info in utils.AVAILABLE_LANGUAGES.items():
@@ -23,7 +23,7 @@ def select_language():
             print("Invalid Option. Try Again.")
 
 def select_mic():
-    utils.cleaning()
+    #utils.cleaning()
     p = pyaudio.PyAudio()
     info_devices = []
     

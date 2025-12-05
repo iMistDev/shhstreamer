@@ -44,6 +44,11 @@ function stop() {
     js_log("Stopping... (Waiting for actual phase...)");
 }
 
+function updateVolume(val) {
+    document.getElementById('volLabel').innerText = val + "%";
+    eel.update_config('volume', val); 
+}
+
 eel.expose(js_log);
 function js_log(text) {
     let box = document.getElementById('console');

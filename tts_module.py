@@ -1,31 +1,54 @@
-import pyttsx3
+import asyncio
+import edge_tts
+import io
+import pygame
 
+VOICE_MAPPING = {
+    0: "es-CL-LorenzoNeural",
+    1: "es-ES-ElviraNeural",
+    2: "es-MX-DaliaNeural",
+    3: "en-US-JennyNeural"
+}
 
-def select_voice():
-    engine = pyttsx3.init()
-    voices = engine.getProperty('voices')
-    
+def list_voices():
     voice_options = []
-    
-    for i, v in enumerate(voices):
+    for i, name in VOICE_MAPPING.items():
         voice_options.append({
             "id": i,
-            "name": v.name
+            "name": name
         })
-        
     return voice_options
 
-def speak(text, voice_index=0):
-    if not text: return
-    
-    engine = pyttsx3.init()
-    voices = engine.getProperty('voices')
-    
-    if 0 <= voice_index < len(voices):
-        engine.setProperty('voice', voices[voice_index].id)
+async def speak(text: str, voice_id: int, volume: int = 100):
+    if voice_id not in VOICE_MAPPING:
+        print(f"Error: Voice ID {voice_id} not found. Using 0. (default)")
+        voice_id = 0
         
-    engine.setProperty('rate', 150)
+    VOICE = VOICE_MAPPING[voice_id]
     
-    print(f"\n[BOT]: {text}")
-    engine.say(text)
-    engine.runAndWait()
+    try:
+        communicate = edge_tts.Communicate(text, VOICE)
+        
+        audio_buffer = io.BytesIO()
+        async for chunk in communicate.stream():
+            if chunk["type"] == "audio":
+                audio_buffer.write(chunk["data"])
+                
+        audio_buffer.seek(0)
+        
+        try:
+            pygame.mixer.init()
+        except pygame.error:
+            pass
+        
+        vol_float = volume / 100.0
+        pygame.mixer.music.set_volume(vol_float)
+        
+        pygame.mixer.music.load(audio_buffer)
+        pygame.mixer.music.play()
+        
+        while pygame.mixer.music.get_busy():
+            await asyncio.sleep(0.1)
+        
+    except Exception as e:
+        print(f"EdgeTTS Error: {e}")
