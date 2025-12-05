@@ -51,7 +51,6 @@ I'm plannig to do streams coding while I learn and start a YT Channel soon!  so,
 - **In Discord:** In Voice & Video settings, change the input device to **"CABLE Output"** (The cable's output device acts as the bot's microphone).
 
 ### Setting up This.
-- after installed dependencies do:
-    - python main_eel.py
+- Just plug and play it, extract it and double click after setting up VC
 
 # ENJOY :D (In the Name of Moon) 🌙🤍
