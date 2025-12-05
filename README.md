@@ -4,7 +4,7 @@
 - Voice to text to speech. (VTTS)
 
 # Context (Yapping)
-
+<pre>
 ⠀⠀⠀⠀⠀⠀⠀⢠⣖⡽⣷⢢⣀⣤⡄⠠⢤⡤⢐⣦⣠⣪⣽⣯⣲⡀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⢿⣻⣷⣿⠯⡓⠪⢤⠔⢉⣴⠋⠀⣀⡙⣿⣿⣏⠇⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⢸⢻⠟⠁⢘⢄⢡⠁⠤⠑⣂⢩⠄⢎⠀⠟⠙⣿⡀⠀⠀
@@ -19,7 +19,7 @@
 ⠠⢄⡀⠀⠀⠀⠀⡆⢸⠀⠻⣿⣿⣈⣷⡠⢌⠁⠻⣝⣷⣶⣶⣷⠒⣇⠀⠁
 ⠀⠀⠉⠐⡤⡀⠀⡅⡀⡈⠠⠋⣻⠛⠷⢿⣦⡀⠀⣿⣿⣿⡿⠧⠐⣦⢓⡄
 ⠀⡀⠀⢠⠇⠈⡷⣅⣔⠔⠁⠀⡏⠀⠀⠀⠈⠓⣤⣿⣟⣁⡀⠀⠀⡧⠊⢆
-
+</pre>
 ### Context:
 Hi guys, my name is "iMist" (idk, i was bored lol.) and I made this silly thing bcs
 I got to shy an nervous on stream, also my english is kinda broken since I'm a non native speaker
