@@ -50,7 +50,7 @@ function js_log(text) {
     let p = document.createElement('p');
     p.innerText = text;
     
-    if(text.includes("Tú:")) p.style.color = "#00ffff";
+    if(text.includes("You:")) p.style.color = "#00ffff";
     if(text.includes("Bot:")) p.style.color = "#00ff88";
     if(text.includes("Error")) p.style.color = "red";
     
