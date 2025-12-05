@@ -53,6 +53,15 @@ def select_mic():
     p.terminate()
     return info_devices
     
+def audio_processing(recognizer, audio_data, lang_code):
+    try:
+        return recognizer.recognize_google(audio_data, language=lang_code)
+    except sr.UnknownValueError:
+        return None
+    except Exception as e:
+        print(f"Error on STT: {e}")
+        return None
+    
     # Legacy, CMD UI
     
     #print("\n--- [ Select Your Microphone ] ---")
@@ -73,6 +82,9 @@ def select_mic():
     #    except ValueError:
     #        print("Please, enter a number.")
 
+#OLD, deprecated.
+
+"""
 def hear_function(mic_id, lang_code):
 
     r = sr.Recognizer()
@@ -112,3 +124,4 @@ def hear_function(mic_id, lang_code):
         print(f"Error: {e}")
         
     return None
+"""

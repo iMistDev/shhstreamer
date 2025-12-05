@@ -34,7 +34,7 @@ function start() {
 
 function stop() {
     document.getElementById('btnStop').disabled = true;
-    document.getElementById('btnStop').innerText = "STOPPING...";
+    document.getElementById('btnStop').innerText = "STOP STREAM";
 
     eel.stop_stream();
 

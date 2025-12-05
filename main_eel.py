@@ -3,6 +3,7 @@ import eel.browsers
 import threading
 import vtt_module
 import tts_module
+import speech_recognition as sr
 
 eel.init('web')
 
@@ -65,6 +66,60 @@ def get_lists():
     
 def audio_loop():
     global active_stream
+    print("--- [THREAD] Starting audio Engine... ---")
+    
+    r = sr.Recognizer()
+    r.pause_threshold = 1.5
+    r.dynamic_energy_threshold = False
+    
+    try:
+        mic_id = app_config["mic"]
+        device = mic_id if mic_id is not None else None
+        
+        with sr.Microphone(device_index=device) as source:
+            
+            eel.js_log("--- [SYSTEM] Calibrating Noise... (please be quiet.) ---")
+            print("--- [THREAD] Calibrating... ---")
+            r.adjust_for_ambient_noise(source, duration=1)
+            eel.js_log("--- [SYSTEM] System ready, listening... ---")
+            
+            while active_stream:
+                try:
+                    try:
+                        audio = r.listen(source, timeout=1, phrase_time_limit=6)
+                    except sr.WaitTimeoutError:
+                        continue
+                
+                    if not active_stream:
+                        print("--- [THREAD] Stop detected after listening. ---")
+                        break
+                 
+                    eel.js_log("--- [SYSTEM] Processing... ---")
+                
+                    text = vtt_module.audio_processing(r, audio, app_config["lang"])
+                
+                    if text:
+                        eel.js_log(f" >Your Microphone: {text}")
+                        if active_stream:
+                            eel.js_log(f" >Your voice: {text}")
+                            tts_module.speak(text, app_config["voice"])
+                            eel.js_log("Listening...")
+                except Exception as e:
+                    print(f"Error while looping: {e}")
+                    if active_stream:
+                        eel.js_log(f"Error: {e}")
+    except Exception as e:
+        eel.js_log(f" --- [ERROR] Critical error while opening mic: {e}")
+        print(f"--- [SYSTEM] CRITICAL ERROR: {e} ---")
+        active_stream = False
+        
+    eel.js_log("--- [SYSTEM] SHUTDOWN SYSTEM ---")
+    print("--- [THREAD] Thread finished. ---")
+                
+# Deprecated / Refactorized
+""" 
+def audio_loop():
+    global active_stream
     print("--- [THREAD] Entering Audio Loop. ---")
     try:
         print(f" [CHECK] Mic ID: {app_config['mic']}")
@@ -107,7 +162,8 @@ def audio_loop():
             active_stream = False
             break
     eel.js_log(">>>SHUTDOWN SYSTEM")
-    print("--- [THREAD] Loop finished successfully. ---")            
+    print("--- [THREAD] Loop finished successfully. ---") 
+"""             
 chromium_browser = r"D:\Chromium\chrome-win\chrome.exe"
 
 eel.browsers.set_path('chrome', chromium_browser)
