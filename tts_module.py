@@ -4,6 +4,12 @@ import io
 import pygame
 import utils
 
+try:
+    pygame.mixer.init()
+    print("--- [TTS] Audio Engine Pre-Loaded ---")
+except pygame.error:
+    print("--- [TTS] Can't pre-load the audio engine. ---")
+
 def list_voices():
     voice_options = []
     for i, data in utils.TTS_VOICES.items():
@@ -18,6 +24,9 @@ async def speak(text: str, voice_id: int, volume: int = 100):
         print(f"Error: Voice ID {voice_id} not found. Using 0. (default)")
         voice_id = 0
         
+    if not text or not text.strip():
+        return
+     
     VOICE = utils.TTS_VOICES[voice_id]["code"]
     
     try:
@@ -30,11 +39,6 @@ async def speak(text: str, voice_id: int, volume: int = 100):
                 
         audio_buffer.seek(0)
         
-        try:
-            pygame.mixer.init()
-        except pygame.error:
-            pass
-        
         vol_float = volume / 100.0
         pygame.mixer.music.set_volume(vol_float)
         
@@ -42,7 +46,7 @@ async def speak(text: str, voice_id: int, volume: int = 100):
         pygame.mixer.music.play()
         
         while pygame.mixer.music.get_busy():
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(0.05)
         
     except Exception as e:
         print(f"EdgeTTS Error: {e}")

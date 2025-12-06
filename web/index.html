@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>ShhStreamer</title>
+    <title>ShhStreamer — by: iMist-Dev </title>
     <link rel="app icon" href="app.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="/eel.js"></script>
@@ -37,6 +37,11 @@
                 <input type="range" id="volInput" min="0" max="100" value="100" 
                     oninput="updateVolume(this.value)">
             </div>
+            <div class="control">
+                <label>Mic Sensitivity: <span id="sensLabel">20%</span></label>
+                <input type="range" id="sensInput" min="0" max="100" value="20" 
+                    oninput="updateSens(this.value)">
+            </div>
         </div>
 
         <div id="console" class="console">
@@ -47,6 +52,9 @@
             <button id="btnStop" onclick="stop()" disabled class="btn-stop">STOP STREAM</button>
         </div>
     </div>
+    <div class="footer">
+            Made with <span style="color: #ff4444;">&hearts;</span> by <strong>iMistDev</strong>
+        </div>
     <script src="script.js"></script>
 </body>
 </html>

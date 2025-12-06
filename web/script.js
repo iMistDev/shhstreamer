@@ -28,8 +28,16 @@ window.onload = async function() {
             
             let volReal = datos.config.volume;
 
+            let threshReal = datos.config.sensitivity || 20;
+
+            let sSlider = document.getElementById("sensInput");
+            let sLabel = document.getElementById("sensLabel");
+
             let slider = document.getElementById('volInput');
             let label = document.getElementById('volLabel');
+
+            if (sSlider) sSlider.value = threshReal;
+            if (sLabel) sLabel.innerText = threshReal + "%";
 
             if (slider) slider.value = volReal;
             if (label) label.innerText = volReal + "%";
@@ -79,6 +87,11 @@ function stop() {
 function updateVolume(val) {
     document.getElementById('volLabel').innerText = val + "%";
     eel.update_config('volume', val); 
+}
+
+function updateSens(val) {
+    document.getElementById('sensLabel').innerText = val + "%";
+    eel.update_config('sensitivity', val); 
 }
 
 eel.expose(js_log);

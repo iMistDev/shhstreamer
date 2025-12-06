@@ -35,3 +35,22 @@ button:disabled { background: #555; }
 .btn-stop:disabled{
     background: #444;
 }
+
+.footer {
+    position: fixed;        
+    bottom: 15px;           
+    left: 0;                
+    width: 100%;            
+    
+    text-align: center;     
+    font-size: 0.8rem;
+    color: #666;
+    font-family: sans-serif;
+    pointer-events: none;   
+}
+
+.footer strong {
+    color: #00ff88;
+    pointer-events: auto;   
+    cursor: pointer;
+}

@@ -33,7 +33,8 @@ default_config = {
     "mic": 0,
     "lang": "es-419",
     "voice": 0,
-    "volume": 50
+    "volume": 50,
+    "sensitivity": 20
 }
 
 saved_config = load_config()
@@ -100,13 +101,20 @@ def get_lists():
     except Exception as e:
         print(f"Critical Error on method get_lists(): {e}")
         return {"mics": [], "voices": []}
+
+def calculate_tresh(percent):
+    MIN_AUDIO = 300
+    MAX_AUDIO = 4000
+    
+    return MIN_AUDIO + (percent * (MAX_AUDIO - MIN_AUDIO) / 100)
     
 def audio_loop():
     global active_stream
     print("--- [THREAD] Starting audio Engine... ---")
     
     r = sr.Recognizer()
-    r.pause_threshold = 1.5
+    r.pause_threshold = 0.6
+    r.non_speaking_duration = 0.4
     r.dynamic_energy_threshold = False
     
     try:
@@ -115,13 +123,18 @@ def audio_loop():
         
         with sr.Microphone(device_index=device) as source:
             
-            eel.js_log("--- [SYSTEM] Calibrating Noise... (please be quiet.) ---")
-            print("--- [THREAD] Calibrating... ---")
-            r.adjust_for_ambient_noise(source, duration=1)
-            eel.js_log("--- [SYSTEM] System ready, listening... ---")
+            eel.js_log("--- [SYS] Sistem Ready. ---")
+            eel.js_log("--- [SYS] Remember to check your Mic Sensitivity ---")
+            eel.js_log("--- [SYS] Now start Speaking... ---")
             
             while active_stream:
                 try:
+                    
+                    user_percent = app_config.get("sensitivity", 20)
+                    real_threshold = calculate_tresh(user_percent)
+                    
+                    r.energy_threshold = real_threshold
+                    
                     try:
                         audio = r.listen(source, timeout=1, phrase_time_limit=6)
                     except sr.WaitTimeoutError:
