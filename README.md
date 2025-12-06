@@ -67,3 +67,13 @@ I'm plannig to do streams coding while I learn and start a YT Channel soon!  so,
 - edge-tts==7.2.3
 - pygame==2.6.1
 - pyinstaller==6.17.0
+
+## ⚖️ Legal Disclaimer
+
+**ShhStreamer** is an open-source tool developed for educational purposes and to protect the privacy of content creators (streamers/VTubers) by masking their real voice.
+
+By using this software, you agree to the following:
+
+1.  **No Warranty:** The software is provided "as is", without warranty of any kind. The authors are not responsible for any damage to your hardware, software, or data.
+2.  **User Responsibility:** You are solely responsible for how you use this tool. The developers do not endorse or support the use of ShhStreamer for illegal activities, harassment, scams, or impersonation.
+3.  **Third-Party Services:** This tool relies on Google Speech-to-Text and Microsoft Edge TTS. Use of these APIs is subject to their respective Terms of Service.
