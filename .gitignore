@@ -69,6 +69,7 @@ build/
 dist/
 *.spec
 
+ShhStreamer.spec
 *.ico
 *.json
 *.log

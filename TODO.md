@@ -40,3 +40,7 @@ I made a lot of shit. I need an Icon for this. [DONE]
 ### Add a slider for speak velocity
 
 - this. [Pending]
+
+### fix the getting stuck.
+
+- this. [Pending]
