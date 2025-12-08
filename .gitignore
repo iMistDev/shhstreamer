@@ -72,3 +72,5 @@ dist/
 *.ico
 *.json
 *.log
+
+app.ico
